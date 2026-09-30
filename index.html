@@ -41,6 +41,10 @@
     .button { display:inline-flex; align-items:center; justify-content:center; padding:12px 18px; min-height:46px; background:var(--green); color:#152011; text-decoration:none; font-weight:650; border-radius:5px; }
     .button:hover { background:#d5ffa0; }
     .links>a:not(.button) { font-size:.875rem; }
+    .about { display:grid; grid-template-columns:1fr 1.2fr; gap:35px; border-top:1px solid var(--line); padding:40px 0 55px; }
+    .about h2 { font-size:1.75rem; margin-top:12px; }
+    .about p { color:var(--muted); margin:0 0 15px; }
+    .about .links { margin-top:24px; }
     .contribute { display:grid; grid-template-columns:1fr 1.2fr; gap:35px; padding:0 0 55px; }
     .contribute h2 { font-size:1.75rem; }
     .contribute p { color:var(--muted); margin:0 0 15px; }
@@ -49,11 +53,12 @@
       .wrap { padding:0 20px; }
       header { flex-wrap:wrap; gap:14px; }
       .intro { padding:45px 0 35px; }
-      .project,.contribute { grid-template-columns:1fr; }
+      .project,.about,.contribute { grid-template-columns:1fr; }
       .project-title,.project-body { padding:25px; }
       .project-title { gap:20px; }
       .project { margin-bottom:40px; }
-      .contribute { gap:16px; }
+      .about,.contribute { gap:16px; }
+      .about { padding:32px 0 40px; }
     }
   </style>
 </head>
@@ -62,7 +67,7 @@
   <div class="wrap">
     <header>
       <a class="brand" href="./" aria-label="WENSLink Open Source home">WENSLINK <span>/ OPEN SOURCE</span></a>
-      <nav aria-label="Main navigation"><a href="#projects">Projects</a><a href="https://github.com/wenslink-os">GitHub profile</a></nav>
+      <nav aria-label="Main navigation"><a href="#projects">Projects</a><a href="#about">About</a><a href="https://github.com/wenslink-os">GitHub profile</a></nav>
     </header>
     <main>
       <section class="intro" aria-labelledby="title">
@@ -76,6 +81,15 @@
           <div class="project-title"><span class="eyebrow">Interactive learning</span><h3 id="project-title">Break Your<br>Assumptions</h3><p>It works. Until it doesn't.</p></div>
           <div class="project-body"><p>Six runnable experiments in the assumptions that break software. Predict an outcome, trigger a failure, explore the repair, and download a regression-test reference.</p><ul class="tags" aria-label="Project topics"><li>JavaScript</li><li>Testing</li><li>Browser experiments</li></ul><div class="links"><a class="button" href="https://wenslink-os.github.io/break-your-assumptions/">Try the experiments</a><a href="https://github.com/wenslink-os/break-your-assumptions">Source code</a><a href="https://github.com/wenslink-os/break-your-assumptions/releases">Releases</a></div></div>
         </article>
+      </section>
+      <section id="about" class="about" aria-labelledby="about-title">
+        <div><p class="eyebrow">About Us</p><h2 id="about-title">WENSLink Private Limited</h2></div>
+        <div>
+          <p>WENSLink Open Source is an initiative of WENSLink Private Limited, created to share practical software projects and make technology easier to explore, understand, and improve.</p>
+          <p>Our approach connects learning with building. Through runnable experiments, readable source code, and clear documentation, we help developers examine how software behaves and apply those lessons to their own work.</p>
+          <p>This hub brings our public projects together in one place. Explore a demo, inspect its source, or contribute an improvement—each project provides its own documentation and license.</p>
+          <div class="links"><a class="button" href="#projects">View our projects</a><a href="https://github.com/wenslink-os">Visit GitHub</a></div>
+        </div>
       </section>
       <section class="contribute" aria-labelledby="contribute-title"><h2 id="contribute-title">Make the next version better.</h2><div><p>Found a bug, a clearer explanation, or an assumption worth testing? Explore the contribution guide and bring your idea to the project.</p><a href="https://github.com/wenslink-os/break-your-assumptions/blob/main/CONTRIBUTING.md">Read the contribution guide</a></div></section>
     </main>
