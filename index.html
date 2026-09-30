@@ -1,0 +1,85 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="description" content="Open-source projects from WENSLink. Explore interactive experiments, read the source, and contribute.">
+  <meta name="theme-color" content="#101714">
+  <title>WENSLink Open Source</title>
+  <link rel="canonical" href="https://wenslink-os.github.io/">
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='12' fill='%23101714'/%3E%3Cpath d='m10 17 9 30 13-22 13 22 9-30' fill='none' stroke='%23c5f277' stroke-width='5'/%3E%3C/svg%3E">
+  <style>
+    :root { color-scheme:dark; font-family:system-ui,-apple-system,Segoe UI,sans-serif; color:#edf2e9; background:#101714; --green:#c5f277; --muted:#b6c4b9; --line:#37463c; }
+    * { box-sizing:border-box; }
+    body { margin:0; line-height:1.6; }
+    a { color:inherit; text-underline-offset:.25em; }
+    a:focus-visible { outline:3px solid var(--green); outline-offset:5px; }
+    .skip { position:absolute; left:20px; top:-100px; padding:12px; background:var(--green); color:#101714; }
+    .skip:focus { top:10px; }
+    .wrap { max-width:1120px; margin:auto; padding:0 28px; }
+    header { display:flex; align-items:center; justify-content:space-between; gap:24px; padding:28px 0; border-bottom:1px solid var(--line); }
+    .brand { font-weight:750; text-decoration:none; letter-spacing:.03em; }
+    .brand span { color:var(--green); }
+    nav { display:flex; flex-wrap:wrap; gap:22px; font-size:.875rem; }
+    .intro { padding:76px 0 58px; max-width:880px; }
+    .eyebrow { color:var(--green); font: .8125rem/1.7 ui-monospace,monospace; letter-spacing:.12em; text-transform:uppercase; }
+    h1 { font-size:clamp(2.5rem,6vw,4.5rem); line-height:1.12; letter-spacing:-.035em; margin:20px 0 24px; font-weight:650; }
+    h1 span { color:var(--green); }
+    .intro>p:last-child { font-size:1.125rem; color:var(--muted); max-width:630px; }
+    .section-label { display:flex; justify-content:space-between; align-items:center; gap:20px; border-top:1px solid var(--line); padding:22px 0; }
+    h2 { margin:0; font-size:1.25rem; font-weight:600; }
+    .section-label span { color:var(--muted); font-size:.875rem; }
+    .project { display:grid; grid-template-columns:1fr 1.2fr; background:#19231d; border:1px solid var(--line); border-radius:10px; overflow:hidden; margin-bottom:60px; }
+    .project-title { padding:38px; background:#202e21; display:flex; flex-direction:column; justify-content:space-between; gap:28px; }
+    .project-title h3 { font-size:clamp(1.75rem,4vw,2.7rem); letter-spacing:-.03em; line-height:1.18; font-weight:550; margin:0; }
+    .project-title p { color:var(--green); margin:0; }
+    .project-body { padding:38px; }
+    .project-body>p { color:var(--muted); margin:0 0 24px; }
+    .tags { display:flex; flex-wrap:wrap; gap:8px; margin:0 0 28px; padding:0; list-style:none; }
+    .tags li { font-size:.8125rem; padding:4px 10px; border:1px solid #52634e; border-radius:4px; color:#d2ddce; }
+    .links { display:flex; align-items:center; flex-wrap:wrap; gap:20px; }
+    .button { display:inline-flex; align-items:center; justify-content:center; padding:12px 18px; min-height:46px; background:var(--green); color:#152011; text-decoration:none; font-weight:650; border-radius:5px; }
+    .button:hover { background:#d5ffa0; }
+    .links>a:not(.button) { font-size:.875rem; }
+    .contribute { display:grid; grid-template-columns:1fr 1.2fr; gap:35px; padding:0 0 55px; }
+    .contribute h2 { font-size:1.75rem; }
+    .contribute p { color:var(--muted); margin:0 0 15px; }
+    footer { border-top:1px solid var(--line); padding:25px 0; display:flex; justify-content:space-between; flex-wrap:wrap; gap:14px; color:var(--muted); font-size:.8125rem; }
+    @media(max-width:650px) {
+      .wrap { padding:0 20px; }
+      header { flex-wrap:wrap; gap:14px; }
+      .intro { padding:45px 0 35px; }
+      .project,.contribute { grid-template-columns:1fr; }
+      .project-title,.project-body { padding:25px; }
+      .project-title { gap:20px; }
+      .project { margin-bottom:40px; }
+      .contribute { gap:16px; }
+    }
+  </style>
+</head>
+<body>
+  <a class="skip" href="#projects">Skip to projects</a>
+  <div class="wrap">
+    <header>
+      <a class="brand" href="./" aria-label="WENSLink Open Source home">WENSLINK <span>/ OPEN SOURCE</span></a>
+      <nav aria-label="Main navigation"><a href="#projects">Projects</a><a href="https://github.com/wenslink-os">GitHub profile</a></nav>
+    </header>
+    <main>
+      <section class="intro" aria-labelledby="title">
+        <p class="eyebrow">WENSLink Open Source</p>
+        <h1>Explore the idea.<br><span>Open the source.</span></h1>
+        <p>A home for projects you can run, understand, and improve. Start with an experiment, inspect how it works, and make it your own.</p>
+      </section>
+      <section id="projects" aria-labelledby="projects-title">
+        <div class="section-label"><h2 id="projects-title">Featured project</h2><span>01 / Collection</span></div>
+        <article class="project" aria-labelledby="project-title">
+          <div class="project-title"><span class="eyebrow">Interactive learning</span><h3 id="project-title">Break Your<br>Assumptions</h3><p>It works. Until it doesn't.</p></div>
+          <div class="project-body"><p>Six runnable experiments in the assumptions that break software. Predict an outcome, trigger a failure, explore the repair, and download a regression-test reference.</p><ul class="tags" aria-label="Project topics"><li>JavaScript</li><li>Testing</li><li>Browser experiments</li></ul><div class="links"><a class="button" href="https://wenslink-os.github.io/break-your-assumptions/">Try the experiments</a><a href="https://github.com/wenslink-os/break-your-assumptions">Source code</a><a href="https://github.com/wenslink-os/break-your-assumptions/releases">Releases</a></div></div>
+        </article>
+      </section>
+      <section class="contribute" aria-labelledby="contribute-title"><h2 id="contribute-title">Make the next version better.</h2><div><p>Found a bug, a clearer explanation, or an assumption worth testing? Explore the contribution guide and bring your idea to the project.</p><a href="https://github.com/wenslink-os/break-your-assumptions/blob/main/CONTRIBUTING.md">Read the contribution guide</a></div></section>
+    </main>
+    <footer><span>WENSLink Open Source</span><a href="https://github.com/wenslink-os/wenslink-os.github.io">Hub source</a></footer>
+  </div>
+</body>
+</html>
