@@ -1,6 +1,10 @@
 # WENSLink Open Source
 
-Static project hub prepared for https://wenslink-os.github.io/.
+Static project hub, published at https://wenslink-os.github.io/.
+
+## Deployment status
+
+Verified on 2026-09-30: the public repository `wenslink-os/wenslink-os.github.io` serves GitHub Pages from `main` at `/(root)` on GitHub's default domain, and the hub is live at https://wenslink-os.github.io/. No custom domain is configured. The `pages build and deployment` run for the last site commit (run 4) completed successfully.
 
 ## Publish
 
@@ -12,8 +16,6 @@ Static project hub prepared for https://wenslink-os.github.io/.
 
 No custom-domain setting, purchased domain, DNS record, API key, or build step is needed.
 Keep the existing `break-your-assumptions` repository and Pages deployment intact.
-
-This package is prepared source, not evidence that the repository or Pages site has been created.
 
 ## Local preview
 
@@ -29,9 +31,31 @@ Only list real published projects; no automatic discovery or background updates 
 
 ## Checks
 
-The HTML structure and expected links were checked during preparation. Browser visual verification
-and live deployment verification are pending. After publishing, check at mobile and desktop widths,
-keyboard navigation, all outbound links, the existing project demo, and the Pages deployment result.
+### Reported checks
+
+These checks were run at publication on 2026-09-30 and reported to the maintainer. They are recorded here as reported.
+
+- The repository was created public and the four files (`index.html`, `README.md`, `LICENSE`, `.nojekyll`) were committed to the root of `main` with the account's no-reply identity.
+- The `index.html` in the repository matched the prepared file byte for byte (SHA-256).
+- The Pages deployment completed successfully.
+- The live page loaded, styles rendered, and the Projects navigation link worked.
+- No horizontal overflow was found at simulated widths of 320, 375, 390, 768, and 1280 px.
+- The hub's project links (demo, source, releases, contribution guide) opened without errors.
+
+### Rechecked on 2026-09-30
+
+These checks were rerun while updating this README.
+
+- https://wenslink-os.github.io/ loads with the title "WENSLink Open Source" and the heading "Explore the idea. Open the source.". The served `index.html` is byte-identical (SHA-256) to the prepared file, and `/.nojekyll` returns 200.
+- Pages workflow runs 2 to 4 completed successfully; run 1 was cancelled.
+- Styles apply (the project card renders as a grid) and the Projects link scrolls to `#projects`.
+- No horizontal overflow at 320, 375, 390, 768, and 1280 px, measured in iframes of those widths.
+- The demo https://wenslink-os.github.io/break-your-assumptions/ returns 200 with its expected title. The source repository page and `CONTRIBUTING.md` return 200 in an unauthenticated fetch.
+
+### Limitations
+
+- Mobile layouts were checked at simulated widths, not on a physical phone.
+- Keyboard-only navigation, screen readers, and browsers other than Chrome were not tested.
 
 ## License
 
