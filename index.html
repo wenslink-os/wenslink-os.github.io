@@ -7,7 +7,7 @@
   <meta name="theme-color" content="#101714">
   <title>WENSLink Open Source</title>
   <link rel="canonical" href="https://wenslink-os.github.io/">
-  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='12' fill='%23101714'/%3E%3Cpath d='m10 17 9 30 13-22 13 22 9-30' fill='none' stroke='%23c5f277' stroke-width='5'/%3E%3C/svg%3E">
+  <link rel="icon" type="image/png" sizes="64x64" href="assets/favicon-64.png">
   <style>
     :root { color-scheme:dark; font-family:system-ui,-apple-system,Segoe UI,sans-serif; color:#edf2e9; background:#101714; --green:#c5f277; --muted:#b6c4b9; --line:#37463c; }
     * { box-sizing:border-box; }
@@ -18,8 +18,9 @@
     .skip:focus { top:10px; }
     .wrap { max-width:1120px; margin:auto; padding:0 28px; }
     header { display:flex; align-items:center; justify-content:space-between; gap:24px; padding:28px 0; border-bottom:1px solid var(--line); }
-    .brand { font-weight:750; text-decoration:none; letter-spacing:.03em; }
-    .brand span { color:var(--green); }
+    .brand { display:inline-flex; align-items:center; gap:12px; font-weight:750; text-decoration:none; letter-spacing:.03em; }
+    .brand-text span { color:var(--green); }
+    .brand-logo { width:44px; height:44px; flex:none; }
     nav { display:flex; flex-wrap:wrap; gap:22px; font-size:.875rem; }
     .intro { padding:76px 0 58px; max-width:880px; }
     .eyebrow { color:var(--green); font: .8125rem/1.7 ui-monospace,monospace; letter-spacing:.12em; text-transform:uppercase; }
@@ -46,9 +47,12 @@
     .about p { color:var(--muted); margin:0 0 15px; }
     .about .eyebrow { color:var(--green); margin:0; }
     .about .links { margin-top:24px; }
+    .about-logo { display:block; width:128px; height:128px; margin-top:24px; }
     .contribute { display:grid; grid-template-columns:1fr 1.2fr; gap:35px; padding:0 0 55px; }
     .contribute h2 { font-size:1.75rem; }
     .contribute p { color:var(--muted); margin:0 0 15px; }
+    .foot-brand { display:inline-flex; align-items:center; gap:10px; }
+    .foot-brand img { width:24px; height:24px; flex:none; }
     footer { border-top:1px solid var(--line); padding:25px 0; display:flex; justify-content:space-between; flex-wrap:wrap; gap:14px; color:var(--muted); font-size:.8125rem; }
     .sr-only { position:absolute; width:1px; height:1px; margin:-1px; padding:0; overflow:hidden; clip:rect(0 0 0 0); white-space:nowrap; border:0; }
     .star-bar { display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:14px 28px; padding:18px 0; border-bottom:1px solid var(--line); }
@@ -72,6 +76,7 @@
       .project { margin-bottom:40px; }
       .about,.contribute { gap:16px; }
       .about { padding:32px 0 40px; }
+      .about-logo { width:96px; height:96px; margin-top:16px; }
       .star-bar { gap:12px; padding:14px 0; }
       .star-actions { width:100%; }
       .star-button { flex:1 1 auto; }
@@ -82,7 +87,7 @@
   <a class="skip" href="#projects">Skip to projects</a>
   <div class="wrap">
     <header>
-      <a class="brand" href="./" aria-label="WENSLink Open Source home">WENSLINK <span>/ OPEN SOURCE</span></a>
+      <a class="brand" href="./" aria-label="WENSLink Open Source home"><img class="brand-logo" src="assets/wenslink-logo-96.png" alt="" width="44" height="44"><span class="brand-text">WENSLINK <span>/ OPEN SOURCE</span></span></a>
       <nav aria-label="Main navigation"><a href="#projects">Projects</a><a href="#about">About</a><a href="https://github.com/wenslink-os">GitHub profile</a></nav>
     </header>
     <aside class="star-bar" aria-label="Support the hub">
@@ -107,7 +112,7 @@
         </article>
       </section>
       <section id="about" class="about" aria-labelledby="about-title">
-        <div><p class="eyebrow">About Us</p><h2 id="about-title">WENSLink Private Limited</h2></div>
+        <div><p class="eyebrow">About Us</p><h2 id="about-title">WENSLink Private Limited</h2><img class="about-logo" src="assets/wenslink-logo-256.png" alt="WENSLink logo" width="128" height="128"></div>
         <div>
           <p>WENSLink Open Source is an initiative of WENSLink Private Limited, created to share practical software projects and make technology easier to explore, understand, and improve.</p>
           <p>Our approach connects learning with building. Through runnable experiments, readable source code, and clear documentation, we help developers examine how software behaves and apply those lessons to their own work.</p>
@@ -117,7 +122,7 @@
       </section>
       <section class="contribute" aria-labelledby="contribute-title"><h2 id="contribute-title">Make the next version better.</h2><div><p>Found a bug, a clearer explanation, or an assumption worth testing? Explore the contribution guide and bring your idea to the project.</p><a href="https://github.com/wenslink-os/break-your-assumptions/blob/main/CONTRIBUTING.md">Read the contribution guide</a></div></section>
     </main>
-    <footer><span>WENSLink Open Source</span><a href="https://github.com/wenslink-os/wenslink-os.github.io">Hub source</a></footer>
+    <footer><span class="foot-brand"><img src="assets/wenslink-logo-96.png" alt="" width="24" height="24">WENSLink Open Source</span><a href="https://github.com/wenslink-os/wenslink-os.github.io">Hub source</a></footer>
   </div>
   <script>
     (function () {
