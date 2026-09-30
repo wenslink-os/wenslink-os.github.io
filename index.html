@@ -50,6 +50,18 @@
     .contribute h2 { font-size:1.75rem; }
     .contribute p { color:var(--muted); margin:0 0 15px; }
     footer { border-top:1px solid var(--line); padding:25px 0; display:flex; justify-content:space-between; flex-wrap:wrap; gap:14px; color:var(--muted); font-size:.8125rem; }
+    .sr-only { position:absolute; width:1px; height:1px; margin:-1px; padding:0; overflow:hidden; clip:rect(0 0 0 0); white-space:nowrap; border:0; }
+    .star-bar { display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:14px 28px; padding:18px 0; border-bottom:1px solid var(--line); }
+    .star-bar p { margin:0; color:var(--muted); font-size:.9375rem; }
+    .star-actions { display:flex; align-items:center; flex-wrap:wrap; gap:14px 18px; }
+    .star-button { display:inline-flex; align-items:center; justify-content:center; gap:8px; min-height:46px; padding:12px 20px; background:var(--green); color:#152011; font-weight:700; text-decoration:none; border-radius:5px; box-shadow:0 0 14px 1px rgba(197,242,119,.32); }
+    .star-button:hover { background:#d5ffa0; }
+    .star-button.is-glowing { animation:star-glow 3.6s ease-in-out infinite; }
+    .star-stop { min-height:40px; padding:6px 12px; background:transparent; color:var(--muted); border:1px solid var(--line); border-radius:5px; font:inherit; font-size:.8125rem; cursor:pointer; }
+    .star-stop:hover { color:#edf2e9; border-color:#52634e; }
+    .star-stop:focus-visible { outline:3px solid var(--green); outline-offset:3px; }
+    @keyframes star-glow { 0%,100% { box-shadow:0 0 8px 1px rgba(197,242,119,.22); } 50% { box-shadow:0 0 30px 8px rgba(197,242,119,.55); } }
+    @media (prefers-reduced-motion: reduce) { .star-button.is-glowing { animation:none; } }
     @media(max-width:650px) {
       .wrap { padding:0 20px; }
       header { flex-wrap:wrap; gap:14px; }
@@ -60,6 +72,9 @@
       .project { margin-bottom:40px; }
       .about,.contribute { gap:16px; }
       .about { padding:32px 0 40px; }
+      .star-bar { gap:12px; padding:14px 0; }
+      .star-actions { width:100%; }
+      .star-button { flex:1 1 auto; }
     }
   </style>
 </head>
@@ -70,6 +85,14 @@
       <a class="brand" href="./" aria-label="WENSLink Open Source home">WENSLINK <span>/ OPEN SOURCE</span></a>
       <nav aria-label="Main navigation"><a href="#projects">Projects</a><a href="#about">About</a><a href="https://github.com/wenslink-os">GitHub profile</a></nav>
     </header>
+    <aside class="star-bar" aria-label="Support the hub">
+      <p>Enjoy these projects? Support the hub with a GitHub star.</p>
+      <div class="star-actions">
+        <a id="star-cta" class="star-button" href="https://github.com/wenslink-os/wenslink-os.github.io" target="_blank" rel="noopener noreferrer"><span aria-hidden="true">★</span> Star on GitHub<span class="sr-only"> (opens GitHub in a new tab)</span></a>
+        <button type="button" id="star-stop" class="star-stop" hidden>Stop animation</button>
+      </div>
+      <span id="star-status" class="sr-only" role="status"></span>
+    </aside>
     <main>
       <section class="intro" aria-labelledby="title">
         <p class="eyebrow">WENSLink Open Source</p>
@@ -96,5 +119,24 @@
     </main>
     <footer><span>WENSLink Open Source</span><a href="https://github.com/wenslink-os/wenslink-os.github.io">Hub source</a></footer>
   </div>
+  <script>
+    (function () {
+      var KEY = 'wenslink:hub:star-cta-dismissed';
+      var link = document.getElementById('star-cta'), stop = document.getElementById('star-stop'), status = document.getElementById('star-status');
+      if (!link || !stop) return;
+      var mq = window.matchMedia ? window.matchMedia('(prefers-reduced-motion: reduce)') : null;
+      var dismissed = false;
+      try { dismissed = window.localStorage.getItem(KEY) === '1'; } catch (e) { /* Storage unavailable: dismissal lasts for this page session only. */ }
+      function motionAllowed() { return !(mq && mq.matches); }
+      function start() { if (dismissed || !motionAllowed()) return; link.classList.add('is-glowing'); stop.hidden = false; }
+      function halt() { link.classList.remove('is-glowing'); stop.hidden = true; }
+      function dismiss() { dismissed = true; halt(); try { window.localStorage.setItem(KEY, '1'); } catch (e) { /* Ignore blocked storage. */ } }
+      link.addEventListener('click', dismiss);
+      link.addEventListener('auxclick', function (e) { if (e.button === 1) dismiss(); });
+      stop.addEventListener('click', function () { dismiss(); if (status) status.textContent = 'Animation stopped.'; link.focus(); });
+      if (mq) { var onChange = function () { if (mq.matches) halt(); else start(); }; if (mq.addEventListener) mq.addEventListener('change', onChange); else if (mq.addListener) mq.addListener(onChange); }
+      start();
+    })();
+  </script>
 </body>
 </html>
