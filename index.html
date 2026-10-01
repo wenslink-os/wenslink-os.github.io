@@ -62,6 +62,10 @@
     .star-button { display:inline-flex; align-items:center; justify-content:center; gap:8px; min-height:46px; padding:12px 20px; background:var(--green); color:#152011; font-weight:700; text-decoration:none; border-radius:5px; box-shadow:0 0 14px 1px rgba(197,242,119,.32); }
     .star-button:hover { background:#d5ffa0; }
     .star-button.is-glowing { animation:star-glow 3.6s ease-in-out infinite; }
+    .star-total { display:inline-flex; align-items:center; min-height:46px; padding:10px 16px; border:1px solid var(--line); border-radius:5px; color:#edf2e9; text-decoration:none; font-size:.9375rem; white-space:nowrap; }
+    .star-total[hidden] { display:none; }
+    .star-total b { color:var(--green); font-size:1.0625rem; }
+    .star-total:hover { border-color:#52634e; }
     .star-stop { min-height:40px; padding:6px 12px; background:transparent; color:var(--muted); border:1px solid var(--line); border-radius:5px; font:inherit; font-size:.8125rem; cursor:pointer; }
     .star-stop:hover { color:#edf2e9; border-color:#52634e; }
     .star-stop:focus-visible { outline:3px solid var(--green); outline-offset:3px; }
@@ -95,6 +99,7 @@
       <p>Enjoy these projects? Support the hub with a GitHub star.</p>
       <div class="star-actions">
         <a id="star-cta" class="star-button" href="https://github.com/wenslink-os/wenslink-os.github.io" target="_blank" rel="noopener noreferrer"><span aria-hidden="true">★</span> Star on GitHub<span class="sr-only"> (opens GitHub in a new tab)</span></a>
+        <a id="star-total" class="star-total" href="https://github.com/wenslink-os?tab=repositories" hidden><b id="star-total-num">0</b>&nbsp;<span id="star-total-label">stars</span>&nbsp;across&nbsp;<span id="star-total-repos">0</span>&nbsp;<span id="star-total-repos-label">repositories</span></a>
         <button type="button" id="star-stop" class="star-stop" hidden>Stop animation</button>
       </div>
       <span id="star-status" class="sr-only" role="status"></span>
@@ -162,6 +167,38 @@
       stop.addEventListener('click', function () { dismiss(); if (status) status.textContent = 'Animation stopped.'; link.focus(); });
       if (mq) { var onChange = function () { if (mq.matches) halt(); else start(); }; if (mq.addEventListener) mq.addEventListener('change', onChange); else if (mq.addListener) mq.addListener(onChange); }
       start();
+    })();
+    (function () {
+      var box = document.getElementById('star-total');
+      if (!box || !window.fetch) return;
+      var KEY = 'wenslink:hub:star-total', TTL = 10 * 60 * 1000;
+      function show(stars, repos) {
+        document.getElementById('star-total-num').textContent = stars.toLocaleString('en');
+        document.getElementById('star-total-label').textContent = stars === 1 ? 'star' : 'stars';
+        document.getElementById('star-total-repos').textContent = String(repos);
+        document.getElementById('star-total-repos-label').textContent = repos === 1 ? 'repository' : 'repositories';
+        box.setAttribute('aria-label', stars + (stars === 1 ? ' star' : ' stars') + ' across ' + repos + (repos === 1 ? ' repository' : ' repositories') + ' on GitHub');
+        box.hidden = false;
+      }
+      try {
+        var cached = JSON.parse(window.sessionStorage.getItem(KEY));
+        if (cached && typeof cached.s === 'number' && typeof cached.r === 'number' && Date.now() - cached.t < TTL) { show(cached.s, cached.r); return; }
+      } catch (e) { /* Storage unavailable: fetch fresh numbers. */ }
+      var total = 0, count = 0;
+      function page(n) {
+        return fetch('https://api.github.com/users/wenslink-os/repos?type=owner&per_page=100&page=' + n, { headers: { Accept: 'application/vnd.github+json' } })
+          .then(function (res) { if (!res.ok) throw new Error('GitHub API ' + res.status); return res.json(); })
+          .then(function (list) {
+            if (!Array.isArray(list)) throw new Error('Unexpected response');
+            list.forEach(function (r) { if (r && !r.fork && !r.private) { total += Number(r.stargazers_count) || 0; count++; } });
+            if (list.length === 100 && n < 5) return page(n + 1);
+          });
+      }
+      page(1).then(function () {
+        if (count === 0) return;
+        show(total, count);
+        try { window.sessionStorage.setItem(KEY, JSON.stringify({ t: Date.now(), s: total, r: count })); } catch (e) { /* Ignore blocked storage. */ }
+      }).catch(function () { /* API unavailable or rate limited: keep the total hidden. */ });
     })();
   </script>
 </body>
